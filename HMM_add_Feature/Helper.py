@@ -4,6 +4,7 @@ import glob
 import csv
 import os
 import re
+import pickle
 from os.path import join
 from utils.settings import DATA_MODEL_DIR
 FJoin = os.path.join
@@ -180,6 +181,14 @@ class Helper:
             data = json.dumps(data, ensure_ascii=False)
             file.write(data)
         return path_out
+
+    @staticmethod
+    def write_object(data, path_out):
+        with open(path_out, "wb") as f:
+            pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
+        return path_out
+
+
 
 
 if __name__ == "__main__":

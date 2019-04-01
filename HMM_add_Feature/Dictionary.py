@@ -1,7 +1,7 @@
 from HMM_add_Feature.Helper import Helper
 from utils.settings import DATA_MODEL_DIR
 from os.path import join
-
+import numpy as np
 class Dictionary:
 
     """
@@ -42,6 +42,83 @@ class Dictionary:
         vocab_number = self.convert_vocab_to_number(vocab)
         helper.write_json(vocab_number, path_out)
         return vocab
+
+    def gen_feature_basic(self, vocab):
+        """
+        function for generation feature basic given (tag z, token i)
+
+        :param vocab:
+        :return:
+        """
+        vocab_feature_basic_B = {}
+        vocab_feature_basic_I = {}
+        for syllable in vocab:
+            feature_B = []
+            feature_I = []
+            index = vocab.get(syllable)
+            feature_B.append(index)
+            feature_I.append(len(vocab) + index)
+            vocab_feature_basic_B[syllable] = feature_B
+            vocab_feature_basic_I[syllable] = feature_I
+        return vocab_feature_basic_B, vocab_feature_basic_I
+
+    def add_enhance_to_feature(self, vocab_feature_basic, stop_word_path):
+        list_stop_word = Helper().load_stop_word(stop_word_path)
+        for vocab_feature_basic_state in vocab_feature_basic:
+            len_vocab = len(vocab_feature_basic_state)
+            print("len vocab", len_vocab)
+            vocab_feature_enhance_state = {}
+            for syllable in vocab_feature_basic_state:
+                enhance_feature = self.gen_enhance_feature(syllable, list_stop_word, len_vocab)
+                # print(enhance_feature)
+                # print(type(enhance_feature))
+                list_basic = vocab_feature_basic_state.get(syllable)
+                vocab_feature_enhance_state[syllable] = list_basic.extend(enhance_feature)
+        return vocab_feature_basic
+
+    def gen_enhance_feature(self, syllable, list_stop_word, len_vocab):
+
+        """
+        function for generation feature (number, stopword, title, punction, ...)
+        demension of vecto = 7
+        +is Vietnamese_syllable: x[0]=1
+        +is title: x[1] = 1
+        +is in stop_word: x[2] = 1
+        +is num : x[3] = 1
+        +is code: x[4] = 1
+        +is foreign_syllable: x[5] = 1
+        +is punct : x[6] = 1
+
+        :param syllable:
+        :param list_stopword:
+        :return:
+        """
+        index_0 = 2*len_vocab
+        index = []
+        if syllable == "PUNCT":
+            i = index_0 + 6
+            index.append(i)
+        elif syllable == "FOREIGN_SYLLABLE":
+            i = index_0 + 5
+            index.append(i)
+        elif syllable == "CODE":
+            i = index_0 + 4
+            index.append(i)
+        elif syllable == "NUMBER":
+            i = index_0 + 3
+            index.append(i)
+        elif syllable in list_stop_word:
+            i = index_0 + 2
+            index.append(index_0)
+            index.append(i)
+        elif syllable.istitle():
+            i = index_0 + 1
+            index.append(index_0)
+            index.append(i)
+        else:
+            index.append(index_0)
+        # print(index)
+        return index
 
     @staticmethod
     def convert_vocab_to_number(vocab):
@@ -98,13 +175,3 @@ class Dictionary:
         return vocab_feature
 
 
-if __name__ == "__main__":
-    path_stopword = join(DATA_MODEL_DIR, "stop_word/c_e_l_viettreebank.txt")
-    path_vlsp =join(DATA_MODEL_DIR, "vlsp/train")
-    path_syllable_vn = join(DATA_MODEL_DIR, "syllable_vn/syllables_dictionary_1.txt")
-    dic = Dictionary()
-    dic.build_vocab(path_vlsp, "vocab_1.json", path_syllable_vn, "vlsp")
-    # vocab_number = Helper().loadfile_data_json("vocab_1.json")
-    # vocab_feature = dic.covert_number_to_feature(vocab_number, path_stopword)
-    # print(vocab_number)
-    # print(vocab_feature)

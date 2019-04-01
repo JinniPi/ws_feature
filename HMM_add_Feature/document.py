@@ -59,7 +59,7 @@ if __name__ == "__main__":
 	helper = Helper()
 	doc = helper.load_data_xml("wiki_00")[1]
 	DOC = Document()
-	vocab_number = helper.loadfile_data_json("vocab_1.json")
+	vocab_number = helper.loadfile_data_json("vocab_vlsp.json")
 	syllables_vn = helper.load_dictionary("syllables_dictionary_1.txt")
 	punt = helper.load_punctuation()
 	result = DOC.convert_doc_to_number(doc, vocab_number, syllables_vn, punt)

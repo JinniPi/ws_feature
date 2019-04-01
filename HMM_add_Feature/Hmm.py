@@ -434,7 +434,7 @@ if __name__ == "__main__":
     path_stopword = join(DATA_MODEL_DIR, "stop_word/c_e_l_viettreebank.txt")
     path_vlsp = join(DATA_MODEL_DIR, "vlsp")
     path_syllable_vn = join(DATA_MODEL_DIR, "syllable_vn/syllables_dictionary_1.txt")
-    vocab_number = helper.loadfile_data_json("vocab_1.json")
+    vocab_number = helper.loadfile_data_json("vocab_vlsp.json")
     data = helper.load_data_vlsp_path(path_vlsp)
     syllable_vn = helper.load_dictionary(path_syllable_vn)
     doc = Document()
