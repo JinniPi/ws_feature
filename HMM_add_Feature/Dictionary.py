@@ -43,7 +43,17 @@ class Dictionary:
         helper.write_json(vocab_number, path_out)
         return vocab
 
-    def gen_feature_basic(self, vocab):
+    def gen_feature_basic_t(self):
+        """
+        state : B (0), I(1)
+        return feature of transition.Each element in the array is a vector,with
+        A[i,j] = 1 if t : state = i , t + 1 : state = j
+        :return:
+        """
+        array_transiton_basic = [[[1, 0, 0, 0], [0, 1, 0, 0]], [[0, 0, 1, 0], [0, 0, 0, 1]]]
+        return np.array(array_transiton_basic)
+
+    def gen_feature_basic_e(self, vocab):
         """
         function for generation feature basic given (tag z, token i)
 
@@ -62,21 +72,25 @@ class Dictionary:
             vocab_feature_basic_I[syllable] = feature_I
         return vocab_feature_basic_B, vocab_feature_basic_I
 
-    def add_enhance_to_feature(self, vocab_feature_basic, stop_word_path):
+    def add_enhance_to_feature_e(self, vocab_feature_basic, stop_word_path):
+        """
+        give index of feature = 1
+        :param vocab_feature_basic:
+        :param stop_word_path:
+        :return:
+        """
         list_stop_word = Helper().load_stop_word(stop_word_path)
         for vocab_feature_basic_state in vocab_feature_basic:
             len_vocab = len(vocab_feature_basic_state)
             print("len vocab", len_vocab)
             vocab_feature_enhance_state = {}
             for syllable in vocab_feature_basic_state:
-                enhance_feature = self.gen_enhance_feature(syllable, list_stop_word, len_vocab)
-                # print(enhance_feature)
-                # print(type(enhance_feature))
+                enhance_feature = self.gen_enhance_feature_e(syllable, list_stop_word, len_vocab)
                 list_basic = vocab_feature_basic_state.get(syllable)
                 vocab_feature_enhance_state[syllable] = list_basic.extend(enhance_feature)
         return vocab_feature_basic
 
-    def gen_enhance_feature(self, syllable, list_stop_word, len_vocab):
+    def gen_enhance_feature_e(self, syllable, list_stop_word, len_vocab):
 
         """
         function for generation feature (number, stopword, title, punction, ...)
@@ -107,7 +121,7 @@ class Dictionary:
         elif syllable == "NUMBER":
             i = index_0 + 3
             index.append(i)
-        elif syllable in list_stop_word:
+        elif syllable.lower() in list_stop_word:
             i = index_0 + 2
             index.append(index_0)
             index.append(i)
@@ -131,6 +145,37 @@ class Dictionary:
         for i, syllable in enumerate(vocab):
             dictionary[syllable] = i
         return dictionary
+
+    def load_file_feature_e(self, file_feature_b, file_feature_i):
+        """
+        load file feature emission return vocab_feature (type tuple)
+        :param file_feature_b:
+        :param file_feature_i:
+        :return:
+        """
+        feature_b = Helper().loadfile_data_json(file_feature_b)
+        feature_i = Helper().loadfile_data_json(file_feature_i)
+        vocab_feature = (feature_b, feature_i)
+        return vocab_feature
+
+    def covert_feature_to_array(self, vocab_feature):
+        """
+        give vocab feature (index) covert to mumpy array
+        :param vocab_feature:
+        :return:
+        """
+        array_feature = []
+        for vocab_feature_state in vocab_feature:
+            vocab_feature_state_array = []
+            for syllable in vocab_feature_state:
+                feature_syllable = np.zeros(len(vocab_feature_state)*2 + 7)
+                index = vocab_feature_state.get(syllable)
+                for i in index:
+                    feature_syllable[i] = 1
+                vocab_feature_state_array.append(feature_syllable)
+            array_feature.append(vocab_feature_state_array)
+
+        return np.array(array_feature, dtype=np.float64)
 
     @staticmethod
     def covert_number_to_feature(vocab_number, stopword_path):
@@ -174,4 +219,12 @@ class Dictionary:
 
         return vocab_feature
 
-
+# if __name__ == "__main__":
+#
+#     file_feature_B = join(DATA_MODEL_DIR, 'vlsp/feature/feature_enhance_B.json')
+#     file_feature_I = join(DATA_MODEL_DIR, 'vlsp/feature/feature_enhance_I.json')
+#     feature_B = Helper().loadfile_data_json(file_feature_B)
+#     feature_I = Helper().loadfile_data_json(file_feature_I)
+#     vocab_feature = (feature_B, feature_I)
+#     array_feature = Dictionary().covert_feature_to_array(vocab_feature)
+#

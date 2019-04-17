@@ -149,8 +149,6 @@ class Helper:
     @staticmethod
     def check_type_syllable(syllable, syllables_dictionary, punctuation):
 
-        # if syllable.lower() in list_stop_word:
-        #     return 'STOP_WORD'
         if syllable.lower() in syllables_dictionary:
             return 'VIETNAMESE_SYLLABLE'
         elif syllable in punctuation:

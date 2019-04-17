@@ -44,9 +44,9 @@ class Document:
 			for syllable in list_syllable_sentence:
 				syllable_number = {}
 				type_syllable = helper.check_type_syllable(syllable, syllables_vn, punctuation)
-				if type_syllable == "VIETNAMESE_SYLLABLE" and syllable.lower() in syllables_appear:
-					syllable_number[syllable] = vocab_number.get(syllable.lower())
-				elif type_syllable == "VIETNAMESE_SYLLABLE" and syllable.lower() not in syllables_appear:
+				if type_syllable == "VIETNAMESE_SYLLABLE" and syllable in syllables_appear:
+					syllable_number[syllable] = vocab_number.get(syllable)
+				elif type_syllable == "VIETNAMESE_SYLLABLE" and syllable not in syllables_appear:
 					syllable_number[syllable] = vocab_number.get("FOREIGN_SYLLABLE")
 				else:
 					syllable_number[syllable] = vocab_number.get(type_syllable)
@@ -56,11 +56,10 @@ class Document:
 
 
 if __name__ == "__main__":
+
 	helper = Helper()
-	doc = helper.load_data_xml("wiki_00")[1]
 	DOC = Document()
-	vocab_number = helper.loadfile_data_json("vocab_vlsp.json")
+	# vocab_number = helper.loadfile_data_json("vocab_vlsp.json")
 	syllables_vn = helper.load_dictionary("syllables_dictionary_1.txt")
 	punt = helper.load_punctuation()
-	result = DOC.convert_doc_to_number(doc, vocab_number, syllables_vn, punt)
-	print(result)
+	print(helper.check_type_syllable("BS", syllables_vn, punt))

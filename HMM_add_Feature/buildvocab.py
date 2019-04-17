@@ -10,17 +10,18 @@ if __name__ == "__main__":
 	path_vlsp = join(DATA_MODEL_DIR, "vlsp/train")
 	path_syllable_vn = join(DATA_MODEL_DIR, "syllable_vn/syllables_dictionary_1.txt")
 	dic = Dictionary()
-	# dic.build_vocab(path_vlsp, "vocab_vlsp.json", path_syllable_vn, "vlsp")
+	dic.build_vocab(path_vlsp, "vocab_vlsp.json", path_syllable_vn, "vlsp")
 
 	vocab = Helper().loadfile_data_json("vocab_vlsp.json")
-	vocab_feature_basic = dic.gen_feature_basic(vocab)
+	print(len(vocab))
+	vocab_feature_basic = dic.gen_feature_basic_e(vocab)
 	Helper.write_json(vocab_feature_basic[0], "feature_basic_B.json")
 	Helper.write_json(vocab_feature_basic[1], "feature_basic_I.json")
 
-	vocab_feature_enhance = dic.add_enhance_to_feature(vocab_feature_basic, path_stop_word)
+	vocab_feature_enhance = dic.add_enhance_to_feature_e(vocab_feature_basic, path_stop_word)
 	Helper.write_json(vocab_feature_enhance[0], "feature_enhance_B.json")
 	Helper.write_json(vocab_feature_enhance[1], "feature_enhance_I.json")
-
+	# print(dic.gen_feature_basic_t())
 
 
 
