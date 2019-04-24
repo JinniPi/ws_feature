@@ -21,7 +21,7 @@ class Document:
 				for sentence in sentences:
 					if sentence:
 						sentences = Helper().clear_str(sentence)
-					array_pharagraph_with_sentence.append(sentences)
+						array_pharagraph_with_sentence.append(sentences)
 		return array_pharagraph_with_sentence
 
 	def convert_doc_to_number(self, doc, vocab_number, syllables_vn, punctuation):
@@ -46,6 +46,8 @@ class Document:
 				type_syllable = helper.check_type_syllable(syllable, syllables_vn, punctuation)
 				if type_syllable == "VIETNAMESE_SYLLABLE" and syllable in syllables_appear:
 					syllable_number[syllable] = vocab_number.get(syllable)
+				elif type_syllable == "PUNCT":
+					syllable_number[syllable] = vocab_number.get(syllable)
 				elif type_syllable == "VIETNAMESE_SYLLABLE" and syllable not in syllables_appear:
 					syllable_number[syllable] = vocab_number.get("FOREIGN_SYLLABLE")
 				else:
@@ -53,6 +55,27 @@ class Document:
 				list_syllable_number_sentence.append(syllable_number)
 			list_sentence_convert_to_number.append(list_syllable_number_sentence)
 		return list_sentence_convert_to_number
+
+	def test_sentence(self, doc):
+		list_syllable_sentence = []
+		list_pharagraph = self.detect_paragraph(doc)
+		list_sentence = self.split_sentences(list_pharagraph)
+		for sentence in list_sentence:
+			list_syllable_sentence.append(sentence.split())
+		return  list_syllable_sentence
+
+	def convert_string_to_number(self, sentence):
+		"""
+
+		:param sentence
+		"""
+		strings = []
+		index = []
+		for syllable in sentence:
+			strings.append(list(syllable.keys())[0])
+			index.append(list(syllable.values())[0])
+		return strings, index
+
 
 
 if __name__ == "__main__":

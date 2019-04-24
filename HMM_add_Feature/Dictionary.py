@@ -33,9 +33,10 @@ class Dictionary:
             for syllable in list_syllable:
                 if helper.check_type_syllable(syllable, syllables_vn, pun) == "VIETNAMESE_SYLLABLE":
                     vocab.add(syllable)
+                elif helper.check_type_syllable(syllable, syllables_vn, pun) == "PUNCT":
+                    vocab.add(syllable)
                 else:
                     continue
-            vocab.add("PUNCT")
             vocab.add("CODE")
             vocab.add("NUMBER")
             vocab.add("FOREIGN_SYLLABLE")
@@ -50,7 +51,7 @@ class Dictionary:
         A[i,j] = 1 if t : state = i , t + 1 : state = j
         :return:
         """
-        array_transiton_basic = [[[1, 0, 0, 0], [0, 1, 0, 0]], [[0, 0, 1, 0], [0, 0, 0, 1]]]
+        array_transiton_basic = [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]
         return np.array(array_transiton_basic)
 
     def gen_feature_basic_e(self, vocab):
@@ -67,7 +68,7 @@ class Dictionary:
             feature_I = []
             index = vocab.get(syllable)
             feature_B.append(index)
-            feature_I.append(len(vocab) + index)
+            feature_I.append(index)
             vocab_feature_basic_B[syllable] = feature_B
             vocab_feature_basic_I[syllable] = feature_I
         return vocab_feature_basic_B, vocab_feature_basic_I
@@ -81,6 +82,7 @@ class Dictionary:
         """
         list_stop_word = Helper().load_stop_word(stop_word_path)
         for vocab_feature_basic_state in vocab_feature_basic:
+
             len_vocab = len(vocab_feature_basic_state)
             print("len vocab", len_vocab)
             vocab_feature_enhance_state = {}
@@ -88,6 +90,7 @@ class Dictionary:
                 enhance_feature = self.gen_enhance_feature_e(syllable, list_stop_word, len_vocab)
                 list_basic = vocab_feature_basic_state.get(syllable)
                 vocab_feature_enhance_state[syllable] = list_basic.extend(enhance_feature)
+
         return vocab_feature_basic
 
     def gen_enhance_feature_e(self, syllable, list_stop_word, len_vocab):
@@ -107,7 +110,7 @@ class Dictionary:
         :param list_stopword:
         :return:
         """
-        index_0 = 2*len_vocab
+        index_0 = len_vocab
         index = []
         if syllable == "PUNCT":
             i = index_0 + 6
@@ -168,7 +171,7 @@ class Dictionary:
         for vocab_feature_state in vocab_feature:
             vocab_feature_state_array = []
             for syllable in vocab_feature_state:
-                feature_syllable = np.zeros(len(vocab_feature_state)*2 + 7)
+                feature_syllable = np.zeros(len(vocab_feature_state) + 7)
                 index = vocab_feature_state.get(syllable)
                 for i in index:
                     feature_syllable[i] = 1
@@ -176,55 +179,3 @@ class Dictionary:
             array_feature.append(vocab_feature_state_array)
 
         return np.array(array_feature, dtype=np.float64)
-
-    @staticmethod
-    def covert_number_to_feature(vocab_number, stopword_path):
-
-        """
-        function help convert vocab to feature
-        +is pun: 1(0)
-        +is num : 1(0)
-        +is Vietnamese_syllable: 1(0)
-        +is stop_word. 1(0)
-        +is code: 1
-        +is foreign_syllable: 1(0)
-
-        :param vocab_number:
-        :param stopword_path:
-        :return:
-        """
-
-        helper = Helper()
-        list_stop_word = helper.load_stop_word(stopword_path)
-        vocab_feature = {}
-        for vocab in vocab_number:
-            # print(vocab)
-            if vocab == "CODE":
-                vocab_feature[vocab_number[vocab]] = [0, 0, 0, 0, 1, 0]
-                # print(vocab_feature[vocab_number[vocab]])
-            elif vocab == "NUMBER":
-                # print("vao NUMBER")
-                vocab_feature[vocab_number[vocab]] = [0, 1, 0, 0, 0, 0]
-                # print(vocab_feature[vocab_number[vocab]])
-            elif vocab == "FOREIGN_SYLLABLE":
-                vocab_feature[vocab_number[vocab]] = [0, 0, 0, 0, 0, 1]
-            elif vocab == "PUNCT":
-                vocab_feature[vocab_number[vocab]] = [1, 0, 0, 0, 0, 0]
-            elif vocab in list_stop_word:
-                # print("vao stop word")
-                vocab_feature[vocab_number[vocab]] = [0, 0, 1, 1, 0, 0]
-            else:
-                vocab_feature[vocab_number[vocab]] = [0, 0, 1, 0, 0, 0]
-            # print(vocab_feature)
-
-        return vocab_feature
-
-# if __name__ == "__main__":
-#
-#     file_feature_B = join(DATA_MODEL_DIR, 'vlsp/feature/feature_enhance_B.json')
-#     file_feature_I = join(DATA_MODEL_DIR, 'vlsp/feature/feature_enhance_I.json')
-#     feature_B = Helper().loadfile_data_json(file_feature_B)
-#     feature_I = Helper().loadfile_data_json(file_feature_I)
-#     vocab_feature = (feature_B, feature_I)
-#     array_feature = Dictionary().covert_feature_to_array(vocab_feature)
-#

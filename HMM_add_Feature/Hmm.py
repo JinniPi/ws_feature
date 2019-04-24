@@ -1,10 +1,14 @@
 """class for HMM algorithm write by jinniPi"""
 import numpy as np
-from numpy.linalg import norm
 import threading
 import time
 import math
-from HMM_add_Feature.test import LBFGS
+from HMM_add_Feature.logistic_model import LogisticModel
+import pickle
+# from HMM_add_Feature.lbfgs import LBFGS
+# from HMM_add_Feature.document import Document
+
+lg = LogisticModel()
 
 class HiddenMarkovModel:
 
@@ -24,27 +28,11 @@ class HiddenMarkovModel:
         return self.w_transitions
 
     def get_matrix_transition(self):
-        w_transition = self.get_w_transition()
-        res = self.get_probabilities(w_transition, self.feature_t)
-        return res
-
-    def get_probabilities(self, weight, feature):
-        """
-        input weight matrix and feature matrix
-        Each state has a corresponding weight _state.
-        The w_state dimension is equal to the dimension of a feature f.
-        :param weight:
-        :param feature:
-        :return:
-        """
-        res = []
+        matrix_transition = []
         for state in self.states:
-            feature_state_i = np.array(feature[state], dtype=np.float64)
-            Z_state = feature_state_i.dot(weight)
-            e_Z = np.exp(Z_state - np.max(Z_state, axis=0, keepdims=True))
-            A = (e_Z + 1) / (e_Z.sum(axis=0) + len(feature[state]))
-            res.append(A)
-        return np.array(res)
+            probabilities_state = lg.get_probabilities(self.w_transitions[state], self.feature_t[state])
+            matrix_transition.append(probabilities_state)
+        return np.array(matrix_transition)
 
     def get_start_probabilities(self):
 
@@ -54,25 +42,15 @@ class HiddenMarkovModel:
         return self.W_emissions
 
     def get_matrix_emission(self):
-        """
-            Z = X.dot(W)
-            X: matrix of feature shape: m.n
-             m: number word of Vocab
-             n: d of feature eg. [0,1,0] d = 3
-            W.shape = (d,)
-            Compute softmax values for each sets of scores in Z.
-            each column of Z is a set of score.
-           """
-
-        w_emission = np.array(self.W_emissions, dtype=np.float64)
-        res = self.get_probabilities(w_emission, self.vocab_feature_e)
-        return res
+        matrix_emission = []
+        for state in self.states:
+            weight = self.W_emissions[state]
+            feature = self.vocab_feature_e[state]
+            probabilities_state = lg.get_probabilities(weight, feature)
+            matrix_emission.append(probabilities_state)
+        return np.array(matrix_emission)
 
     def forward_algorithm(self, observations_sequence, emission_matrix, transition_matrix, start_probabilities):
-
-        # emission_matrix = self.get_matrix_emission()
-        # transition_matrix = self.get_matrix_transition()
-        # start_probabilities = self.get_start_probabilities()
 
         """
 
@@ -165,13 +143,90 @@ class HiddenMarkovModel:
             'backward_matrix': backward_matrix[::-1]
         }
 
-
-    def veterbi_algorithm(self):
+    def veterbi_algorithm(self, observations_sequence, using_sub_params=False,
+        bigram_hash=None, invert_bigram_hash=None, number_occurrences=None,
+        invert_dictionary=None):
         """
 
+        :param observations_sequence:
+        :param using_sub_params:
+        :param bigram_hash:
+        :param invert_bigram_hash:
+        :param number_occurrences:
+        :param invert_dictionary:
         :return:
         """
-        pass
+        emissions = self.get_matrix_emission()
+        transitions = self.get_matrix_transition()
+        veterbi_matrix = []
+        backtrace_matrix = []
+        if using_sub_params:
+            if not (bigram_hash and invert_bigram_hash):
+                print('Bigram hash and invert bigram hash is required when using sub params!')
+                return []
+
+        for index_observation, observation in enumerate(observations_sequence):
+            key_observation = list(observation.keys())[0]
+            veterbi_array = []
+            backtrace_array = []
+
+            if index_observation == 0:
+                for index_state, state in enumerate(self.states):
+                    alpha_i = self.start_probabilities[index_state] * \
+                        emissions[index_state][observation.get(key_observation)]
+                    beta_i = 0
+                    veterbi_array.append(alpha_i)
+                    backtrace_array.append(beta_i)
+            else:
+                alpha_previous_states = veterbi_matrix[-1]
+                for index_state, state in enumerate(self.states):
+                    alpha_i = 0
+                    beta_i = 0
+                    for index_previous_state, alpha_previous_state in enumerate(alpha_previous_states):
+                        new_alpha_i = alpha_previous_state * \
+                            transitions[index_previous_state][index_state] * \
+                            emissions[index_state][observation.get(key_observation)]
+
+                        if index_previous_state == 0:
+                            alpha_i = new_alpha_i
+                            beta_i = index_previous_state
+                        elif alpha_i < new_alpha_i:
+                            alpha_i = new_alpha_i
+                            beta_i = index_previous_state
+
+                    if using_sub_params and state == 1:
+
+                        sub_parameter = self.__calculate_pmi(
+                            bigram_hash, invert_bigram_hash, observation,
+                            observations_sequence[index_observation - 1],
+                            number_occurrences, invert_dictionary)
+                        alpha_i = alpha_i * sub_parameter
+
+                    veterbi_array.append(alpha_i)
+                    backtrace_array.append(beta_i)
+            veterbi_matrix.append(veterbi_array)
+            backtrace_matrix.append(backtrace_array)
+
+        best_score = 0
+        last_veterbi_matrix = veterbi_matrix[-1]
+        last_state = 0
+        end_probabilities = list(map(lambda state: 1, self.states))
+        for index, state in enumerate(self.states):
+            final_score = last_veterbi_matrix[index] * \
+                end_probabilities[index]
+            if index == 0:
+                best_score = final_score
+                last_state = state
+            elif best_score < final_score:
+                best_score = final_score
+                last_state = state
+
+        #get state sequence with the highest probability
+        states_sequence = [last_state]
+        for index in range(1, len(backtrace_matrix))[::-1]:
+            back_state = states_sequence[-1]
+            states_sequence.append(backtrace_matrix[index][back_state])
+        return states_sequence[::-1]
 
     def baum_welch_algorithm(self, list_observations_sequence, number_thread):
         check_convergence = False
@@ -215,132 +270,42 @@ class HiddenMarkovModel:
 
             # Bước M # Bước này phải cập nhật W :0)
             # calculate new weight emission matrix
-            feature_emission = self.vocab_feature_e
             print("count e", counting_emissions)
             print("count t", counting_transition)
-            # self.W_emissions = self.GD_momentum(self.get_w_emission(), feature_emission, 0.2, counting_emissions, 0.5, 0.9)
-            lb_1 = LBFGS(counting_emissions, self.vocab_feature_e, 0.2)
-            w_init = self.W_emissions
-            self.W_emissions = lb_1.quadratic(w_init)[1]
+            for state in self.states:
+                # lb_e = LBFGS(counting_emissions[state], self.vocab_feature_e[state], 0.1)
+                # lb_t = LBFGS(counting_transition[state], self.feature_t[state], 0.1)
+                # self.W_emissions[state] = lb_e.lbgfs(self.W_emissions[state])
+                # self.w_transitions[state] = lb_t.lbgfs(self.w_transitions[state])
 
-            # calculate new weight transition matrix
+                self.W_emissions[state] = lg.gradient_descent_momentum(
+                    self.W_emissions[state],
+                    self.vocab_feature_e[state],
+                    counting_emissions[state],
+                    0.2,
+                    0.001
+                )
 
-            feature_transition = self.feature_t
+                self.w_transitions[state] = lg.gradient_descent_momentum(
+                    self.w_transitions[state],
+                    self.feature_t[state],
+                    counting_transition[state],
+                    0.2,
+                    0.001
 
-            # self.w_transitions = self.GD_momentum(self.get_w_transition(), feature_transition, 0.2, counting_transition, 0.5, 0.9)
-
-            lb_2 = LBFGS(counting_transition, self.feature_t, 0.2)
-            self.w_transitions = lb_2.quadratic(self.w_transitions)[1]
+                )
 
             print("w_emission", self.get_w_emission())
+            print("emiss", self.get_matrix_emission())
+
             print("w_transion", self.get_w_transition())
+            print("trans", self.get_matrix_transition())
+            # break
 
             check_convergence = self.__check_convergence(matrix_emission_previous, matrix_transition_previous)
             iteration_number += 1
             matrix_emission_previous = self.get_matrix_emission()
             matrix_transition_previous = self.get_matrix_transition()
-
-    def counting_theta_feature(self, W, feature):
-        """
-        w (vecto)
-        feature_array : each feature is vector which have dimension = dimension of w
-        return sum(theta(w)*feature)
-        :return:
-        """
-        matrix_probabilities = self.get_probabilities(W, feature)
-        len_theta_w_state = len(feature[0][0])
-        theta_w = []
-        for i, W_state in enumerate(W):
-            theta_w_state = np.zeros(len_theta_w_state, dtype=np.float64)
-            for j, value in enumerate(feature[i]):
-                theta_w_state += matrix_probabilities[i][j]*np.array(value, dtype=np.float64)
-            theta_w.append(theta_w_state)
-        return theta_w
-
-    def denta_w_dct(self, W, feature):
-        """
-        return matrix loss w of each feature
-        :return:
-        """
-        matrix_theta = self.counting_theta_feature(W, feature)
-        matrix_loss = []
-        for i, W_state in enumerate(W):
-            matrix_loss_state = []
-            for j, value in enumerate(feature[i]):
-                matrix_loss_state.append(np.array(value, dtype=np.float64)-matrix_theta[i])
-            matrix_loss.append(matrix_loss_state)
-        return matrix_loss
-
-    def grad_loss_w_e(self, matrix_count_e, W, feature, k):
-        """
-
-        :param matrix_count_e:
-        :param W:
-        :param feature:
-        :param k:
-        :return:
-        """
-        matrix_denta_w_dct = self.denta_w_dct(W, feature)
-        len_vector_feature = len(feature[0][0])
-        grad_loss = []
-        for state in self.states:
-            grad_loss_state = np.zeros(len_vector_feature, dtype=np.float64)
-            for i, value in enumerate(matrix_count_e[state]):
-                grad_loss_state += value*np.array(matrix_denta_w_dct[state][i], dtype=np.float64)
-            grad_loss_state -= 2*k*W[state]
-            grad_loss.append(grad_loss_state)
-        return grad_loss
-
-    def loss_w_e(self, matrix_count_e, W, feature, k):
-
-        matrix_probabilities = self.get_probabilities(W, feature)
-        loss_w_e = []
-        for state in self.states:
-            loss_w_e_state = 0
-            for i, value in enumerate(matrix_count_e[state]):
-                loss_w_e_state += matrix_count_e[state][i]*math.log(matrix_probabilities[state][i])
-
-            loss_w_e_state = loss_w_e_state - k*norm(matrix_probabilities[state])
-            loss_w_e.append(loss_w_e_state)
-        return loss_w_e
-
-    def has_converged(self,theta_new, grad_theta_new):
-        return np.linalg.norm(grad_theta_new)/theta_new.size < 1e-3
-
-    def GD_momentum(self, w_init, f, k, count_e, eta, gamma):
-    # Suppose we want to store history of theta
-        theta = [w_init]
-
-        print(theta[-1])
-
-        v_old = np.zeros_like(w_init)
-        for it in range(100):
-            v_new = gamma * v_old + eta * np.array(self.grad_loss_w_e(count_e, theta[-1], f, k))
-            theta_new = theta[-1] - v_new
-            print(self.get_probabilities(theta_new, f))
-            grad_theta_new = self.grad_loss_w_e(count_e, theta_new, f, k)
-            if self.has_converged(theta_new, grad_theta_new):
-                break
-            theta.append(theta_new)
-            v_old = v_new
-        return theta[-1]
-
-    def check_w_convergence(self, grad_loss_w):
-        check_convergence = False
-        count_check = 0
-        for state in self.states:
-            if np.linalg.norm(grad_loss_w[state])/len(grad_loss_w) < 1e-3:
-                count_check += 1
-        if count_check == len(self.states):
-            check_convergence = True
-        return check_convergence
-
-    def update_w(self, grad, W, k):
-        W -= k*np.array(grad, dtype=np.float64)
-        return W
-
-    def gradient_desent(self, W_init, eta):
-        pass
 
     def counting_emissions_and_transition(self, list_observations_sequence, list_counting):
         # print 'Start thread at: %f' % time.time()
@@ -425,5 +390,96 @@ class HiddenMarkovModel:
         print('Emission change:', emission_change)
         print('transition_change:', transition_change)
 
-        check = (transition_change < 0.0001) and (emission_change < 0.0001)
+        check = (transition_change < 0.02) and (emission_change < 0.01)
         return check
+
+    def __calculate_pmi(self, bigram_hash, invert_bigram_hash, syllable_index,
+        previous_syllable_index, number_occurrences, invert_dictionary):
+        syllable = invert_dictionary[syllable_index]
+        previous_syllable = invert_dictionary[previous_syllable_index]
+        if previous_syllable not in bigram_hash:
+            return 1
+        if syllable not in invert_bigram_hash:
+            return 1
+        bigram = previous_syllable + ' ' + syllable
+        previous_syllable_hash = bigram_hash[previous_syllable]
+        syllable_hash = invert_bigram_hash[syllable]
+
+        if bigram in previous_syllable_hash:
+            forward_number_occurrences = previous_syllable_hash[bigram]['number_occurrences']
+        else:
+            return 1
+
+        previous_syllable_occurrences = previous_syllable_hash['number_occurrences']
+        syllable_occurrences = syllable_hash['number_occurrences']
+
+        total_unigram_occurrences = number_occurrences['number_unigram_occurrences']
+        return math.log(float(forward_number_occurrences) * total_unigram_occurrences /\
+            (previous_syllable_occurrences * syllable_occurrences))
+
+    def viterbi(self, V, a, b, initial_distribution):
+        T = V.shape[0]
+        # print(T)
+        M = a.shape[0]
+        # print(M)
+
+        omega = np.zeros((T, M))
+        omega[0, :] = np.log(initial_distribution * b[:, V[0]])
+
+        prev = np.zeros((T - 1, M))
+
+        for t in range(1, T):
+            for j in range(M):
+                # Same as Forward Probability
+                probability = omega[t - 1] + np.log(a[:, j]) + np.log(b[j, V[t]])
+
+                # This is our most probable state given previous state at time t (1)
+                prev[t - 1, j] = np.argmax(probability)
+
+                # This is the probability of the most probable state (2)
+                omega[t, j] = np.max(probability)
+
+        # Path Array
+        S = np.zeros(T)
+
+        # Find the most probable last hidden state
+        last_state = np.argmax(omega[T - 1, :])
+
+        S[0] = last_state
+
+        backtrack_index = 1
+        for i in range(T - 2, -1, -1):
+            S[backtrack_index] = prev[i, int(last_state)]
+            last_state = prev[i, int(last_state)]
+            backtrack_index += 1
+
+        # Flip the path array since we were backtracking
+        S = np.flip(S, axis=0)
+
+        # Convert numeric values to actual hidden states
+        result = []
+        for s in S:
+            if s==0:
+                result.append("B")
+            else:
+                result.append("I")
+
+        return result, S
+
+    def save_model(self, file_model_name):
+        """
+
+        :param file_model_name:
+        :return:
+        """
+        model = {"state": self.states,
+                 "start_probabilities": self.start_probabilities,
+                 "emission": self.W_emissions,
+                 "transition": self.w_transitions,
+                 "vocab": self.vocab_number
+        }
+
+        with open(file_model_name, "wb") as f:
+            pickle.dump(model, f, pickle.HIGHEST_PROTOCOL)
+        return file_model_name
+

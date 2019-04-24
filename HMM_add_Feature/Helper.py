@@ -55,6 +55,14 @@ class Helper:
             doc_array.append(doc)
         return doc_array
 
+    def load_data_vlsp_raw(self, path_folder):
+        list_file = self.GetFiles(path_folder)
+        doc_array = []
+        for file in list_file:
+            posts = self.load_data_vlsp(file)
+            doc = '\n'.join(posts)
+            doc_array.append(doc)
+        return doc_array
 
     @staticmethod
     def load_data_xml(filename):
@@ -186,10 +194,16 @@ class Helper:
             pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
         return path_out
 
+    @staticmethod
+    def load_model(file_model):
+        with open(file_model, 'rb') as f:
+            # The protocol version used is detected automatically, so we do not
+            # have to specify it.
+            data = pickle.load(f)
+        return data
 
 
 
 if __name__ == "__main__":
-    path = join(DATA_MODEL_DIR, "vlsp")
-    helper = Helper()
-    print(helper.load_vocab("vocab.txt"))
+   doc = Helper.load_data_vlsp("/home/trang/Downloads/job_rabiloo/Word_Tokenizer/HMM_add_Feature/data/53.seg")
+   print(doc[4].split())
