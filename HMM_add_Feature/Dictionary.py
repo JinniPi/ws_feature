@@ -32,11 +32,12 @@ class Dictionary:
             list_syllable = helper.convert_doc_to_list(doc, option)
             for syllable in list_syllable:
                 if helper.check_type_syllable(syllable, syllables_vn, pun) == "VIETNAMESE_SYLLABLE":
-                    vocab.add(syllable)
-                elif helper.check_type_syllable(syllable, syllables_vn, pun) == "PUNCT":
-                    vocab.add(syllable)
+                    vocab.add(syllable.lower())
+                # elif helper.check_type_syllable(syllable, syllables_vn, pun) == "PUNCT":
+                #     vocab.add(syllable)
                 else:
                     continue
+            vocab.add("PUNCT")
             vocab.add("CODE")
             vocab.add("NUMBER")
             vocab.add("FOREIGN_SYLLABLE")
@@ -171,7 +172,7 @@ class Dictionary:
         for vocab_feature_state in vocab_feature:
             vocab_feature_state_array = []
             for syllable in vocab_feature_state:
-                feature_syllable = np.zeros(len(vocab_feature_state) + 7)
+                feature_syllable = np.zeros(len(vocab_feature_state))
                 index = vocab_feature_state.get(syllable)
                 for i in index:
                     feature_syllable[i] = 1

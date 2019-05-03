@@ -54,13 +54,13 @@ class ProcessDataVlsp:
         list_sentence = []
         for doc in list_doc:
             for sentence in doc:
-                list_sentence.extend(self.get_sentence(sentence))
+                list_sentence.append(self.get_sentence(sentence))
         return list_sentence
 
     def get_tag_doc(self, doc):
         tag_array = []
         for sentence in doc:
-            tag_array.extend(self.get_tag_sentence(sentence)[0])
+            tag_array.append(self.get_tag_sentence(sentence)[0])
         return tag_array
 
     def get_tag_all(self, list_doc):
@@ -89,11 +89,11 @@ class ProcessDataVlsp:
             for syllable in list_syllable_sentence:
                 syllable_number = {}
                 type_syllable = helper.check_type_syllable(syllable, syllables_vn, punctuation)
-                if type_syllable=="VIETNAMESE_SYLLABLE" and syllable in syllables_appear:
+                if type_syllable == "VIETNAMESE_SYLLABLE" and syllable in syllables_appear:
                     syllable_number[syllable] = vocab_number.get(syllable)
-                elif type_syllable=="PUNCT":
+                elif type_syllable == "PUNCT":
                     syllable_number[syllable] = vocab_number.get(syllable)
-                elif type_syllable=="VIETNAMESE_SYLLABLE" and syllable not in syllables_appear:
+                elif type_syllable == "VIETNAMESE_SYLLABLE" and syllable not in syllables_appear:
                     syllable_number[syllable] = vocab_number.get("FOREIGN_SYLLABLE")
                 else:
                     syllable_number[syllable] = vocab_number.get(type_syllable)

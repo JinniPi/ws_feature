@@ -202,8 +202,34 @@ class Helper:
             data = pickle.load(f)
         return data
 
+    def invert_diction(self, input_file, output_file):
+        """
+        return file diction invert (key-value) => (value-key)
+        :param input_file:
+        :param output_file:
+        :return:
+        """
+        dict_input = self.loadfile_data_json(input_file)
+        dict_output = {}
+        for index, value in enumerate(dict_input):
+            dict_output[index] = value
+        self.write_json(dict_output, output_file)
+        return output_file
+
+    @staticmethod
+    def load_obj(path_to_file):
+        with open(path_to_file, 'rb') as f:
+            u = pickle._Unpickler(f)
+            u.encoding = 'utf8'
+            p = u.load()
+            return p
+
+
+
+
 
 
 if __name__ == "__main__":
-   doc = Helper.load_data_vlsp("/home/trang/Downloads/job_rabiloo/Word_Tokenizer/HMM_add_Feature/data/53.seg")
-   print(doc[4].split())
+  path_vocab = "/home/trang/Downloads/job_rabiloo/Word_Tokenizer/data/vlsp/vocab_vlsp.json"
+  helper = Helper()
+  helper.invert_diction(path_vocab, "vocab_invert_vlsp.json")

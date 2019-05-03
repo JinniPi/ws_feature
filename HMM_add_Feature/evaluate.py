@@ -27,16 +27,30 @@ class Evalute:
             list_index.append(np.array(convert[1]))
         return list_syllable, list_index
 
-    def predict_tag(self, list_sequence):
+    def predict_tag(self, list_sequence, using_sub_params=False,
+        bigram_hash=None, invert_bigram_hash=None, number_occurrences=None,
+        invert_dictionary=None):
+        # print(list_sequence)
 
-        transition = self.model.get_matrix_transition()
-        emission = self.model.get_matrix_emission()
-        start = self.model.get_start_probabilities()
+        # transition = self.model.get_matrix_transition()
+        # emission = self.model.get_matrix_emission()
+        # start = self.model.get_start_probabilities()
 
         tag_result = []
-        for sequence in list_sequence:
-            tag_sequence = self.model.viterbi(sequence, transition, emission, start)[0]
-            tag_result.extend(tag_sequence)
+        for index, sequence in enumerate(list_sequence[1]):
+            # print(index)
+            # print(list_sequence[0][index])
+            print(sequence)
+            tag_sequence = self.model.veterbi_algorithm(
+                                                        sequence,
+                                                        using_sub_params,
+                                                        bigram_hash,
+                                                        invert_bigram_hash,
+                                                        number_occurrences,
+                                                        invert_dictionary
+                                                    )[1]
+            print(tag_sequence)
+            tag_result.append(tag_sequence)
         return tag_result
 
     def evalute(self, predict, trust, target_name):
@@ -61,13 +75,12 @@ class Evalute:
         """
         try:
             # predict_tags = self.predict(unlabeled_sequence)
-            predict_tags = self.model.viterbi(sequence_unlabel_index,
-                            self.model.get_matrix_transition(),
-                            self.model.get_matrix_emission(),
-                            self.model.get_start_probabilities())
+            # print(sequence_unlabel_index)
+            print("1. ", labeled_sequence)
+            predict_tags = self.model.veterbi_algorithm(sequence_unlabel_index)[0]
 
-            predict_tags = predict_tags[1]
-            print(predict_tags)
+            # predict_tags = predict_tags[1]
+            print("2 .", predict_tags)
 
             word_array = []
             new_word = []
@@ -79,7 +92,8 @@ class Evalute:
                 else:
                     new_word.append(unlabeled_sequence[index])
             word_array.append('_'.join(new_word))
-            print(word_array)
+            print("3. ", word_array )
+            print("\n")
             number_predict_true = 0
             for word in word_array:
                 if word in labeled_sequence:

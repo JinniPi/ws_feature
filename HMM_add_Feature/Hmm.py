@@ -166,14 +166,14 @@ class HiddenMarkovModel:
                 return []
 
         for index_observation, observation in enumerate(observations_sequence):
-            key_observation = list(observation.keys())[0]
+            # key_observation = list(observation.keys())[0]
             veterbi_array = []
             backtrace_array = []
 
             if index_observation == 0:
                 for index_state, state in enumerate(self.states):
                     alpha_i = self.start_probabilities[index_state] * \
-                        emissions[index_state][observation.get(key_observation)]
+                        emissions[index_state][observation]
                     beta_i = 0
                     veterbi_array.append(alpha_i)
                     backtrace_array.append(beta_i)
@@ -185,7 +185,7 @@ class HiddenMarkovModel:
                     for index_previous_state, alpha_previous_state in enumerate(alpha_previous_states):
                         new_alpha_i = alpha_previous_state * \
                             transitions[index_previous_state][index_state] * \
-                            emissions[index_state][observation.get(key_observation)]
+                            emissions[index_state][observation]
 
                         if index_previous_state == 0:
                             alpha_i = new_alpha_i
@@ -226,7 +226,14 @@ class HiddenMarkovModel:
         for index in range(1, len(backtrace_matrix))[::-1]:
             back_state = states_sequence[-1]
             states_sequence.append(backtrace_matrix[index][back_state])
-        return states_sequence[::-1]
+
+        result = []
+        for s in states_sequence[::-1]:
+            if s==0:
+                result.append("B")
+            else:
+                result.append("I")
+        return states_sequence[::-1], result
 
     def baum_welch_algorithm(self, list_observations_sequence, number_thread):
         check_convergence = False
@@ -283,7 +290,7 @@ class HiddenMarkovModel:
                     self.vocab_feature_e[state],
                     counting_emissions[state],
                     0.2,
-                    0.001
+                    0.01
                 )
 
                 self.w_transitions[state] = lg.gradient_descent_momentum(
@@ -291,7 +298,7 @@ class HiddenMarkovModel:
                     self.feature_t[state],
                     counting_transition[state],
                     0.2,
-                    0.001
+                    0.01
 
                 )
 
@@ -390,22 +397,26 @@ class HiddenMarkovModel:
         print('Emission change:', emission_change)
         print('transition_change:', transition_change)
 
-        check = (transition_change < 0.02) and (emission_change < 0.01)
+        check = (transition_change < 0.002) and (emission_change < 0.001)
         return check
 
     def __calculate_pmi(self, bigram_hash, invert_bigram_hash, syllable_index,
         previous_syllable_index, number_occurrences, invert_dictionary):
-        syllable = invert_dictionary[syllable_index]
-        previous_syllable = invert_dictionary[previous_syllable_index]
+        # print(syllable_index)
+        syllable = invert_dictionary[str(syllable_index)].lower()
+        previous_syllable = invert_dictionary[str(previous_syllable_index)].lower()
         if previous_syllable not in bigram_hash:
+            # print(previous_syllable)
             return 1
         if syllable not in invert_bigram_hash:
+            # print(syllable)
             return 1
         bigram = previous_syllable + ' ' + syllable
         previous_syllable_hash = bigram_hash[previous_syllable]
         syllable_hash = invert_bigram_hash[syllable]
 
         if bigram in previous_syllable_hash:
+            # print("yes")
             forward_number_occurrences = previous_syllable_hash[bigram]['number_occurrences']
         else:
             return 1
@@ -418,8 +429,10 @@ class HiddenMarkovModel:
             (previous_syllable_occurrences * syllable_occurrences))
 
     def viterbi(self, V, a, b, initial_distribution):
+        # print("a", a)
+        # print("print", b)
         T = V.shape[0]
-        # print(T)
+        # print("T", V)
         M = a.shape[0]
         # print(M)
 

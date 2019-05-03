@@ -14,7 +14,7 @@ pdv = ProcessDataVlsp()
 # path data
 path_data_test = join(DATA_MODEL_DIR, "vlsp/test/train")
 # path_vocab = join(DATA_MODEL_DIR, "vlsp/vocab_vlsp.json")
-file_feature_e_b = join(DATA_MODEL_DIR, "vlsp/feature/feature_enhance_B.json")
+file_feature_e_b = join(DATA_MODEL_DIR, "vlsp/feature/feature_basic_B.json")
 file_feature_e_i = join(DATA_MODEL_DIR, "vlsp/feature/feature_basic_I.json")
 
 #load data
@@ -26,20 +26,39 @@ punt = helper.load_punctuation()
 diction = Dictionary()
 vocab_feature_e = diction.load_file_feature_e(file_feature_e_b, file_feature_e_i)
 vocab_e = diction.covert_feature_to_array(vocab_feature_e)
+# print(vocab_feature_e)
 vocab_t = diction.gen_feature_basic_t()
 
 #loadmodel
 model = helper.load_model("model_basic_1.pickle")
 w_emission = model["emission"]
+# print(len(w_emission[0]))
 w_transition = model["transition"]
 states = model["state"]
 vocab = model["vocab"]
+# print(vocab)
 start = model["start_probabilities"]
 
 hmm = HiddenMarkovModel(states, w_transition, w_emission, start, vocab_e, vocab_t, vocab)
-ev = Evalute(hmm)
-list_sentence_unlabel = ev.convert_data(data, syllables_vn, punt)
-list_sentence_label = pdv.get_word_all_sentence(data)
+matrix = hmm.get_matrix_emission()
+print(hmm.get_matrix_transition())
+f = open("emission_basic.txt", "w")
+f.writelines("W     B   I" + "\n")
+for index, word in enumerate(vocab):
+    lines = word + "\t" + str(matrix[0][index]) + "\t" + str(matrix[1][index])+"\n"
+    f.writelines(lines)
+f.close()
 
-# evalute
-result = ev.report_precision(list_sentence_unlabel, list_sentence_label)
+
+
+# ev = Evalute(hmm)
+# # print(data[99])
+# # print(ev.model.get_matrix_emission())
+# list_sentence_unlabel = ev.convert_data(data, syllables_vn, punt)
+# # print(list_sentence_unlabel[1][55])
+# list_sentence_label = pdv.get_word_all_sentence(data)
+# # print(list_sentence_unlabel[1][1])
+# # print(ev.model.veterbi_algorithm(list_sentence_unlabel[1]))
+#
+# # evalute
+# result = ev.report_precision(list_sentence_unlabel, list_sentence_label)
