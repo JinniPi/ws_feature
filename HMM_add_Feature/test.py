@@ -13,9 +13,9 @@ pdv = ProcessDataVlsp()
 
 # path data
 path_data_test = join(DATA_MODEL_DIR, "vlsp/test/train")
-# path_vocab = join(DATA_MODEL_DIR, "vlsp/vocab_vlsp.json")
-file_feature_e_b = join(DATA_MODEL_DIR, "vlsp/feature/feature_basic_B.json")
-file_feature_e_i = join(DATA_MODEL_DIR, "vlsp/feature/feature_basic_I.json")
+# path_vocab = join(DATA_MODEL_DIR, "vlsp/vocab_vlsp_punt_normal.json")
+file_feature_e_b = join(DATA_MODEL_DIR, "vlsp/feature_not_independent/feature_basic_punt_normal_B.json")
+file_feature_e_i = join(DATA_MODEL_DIR, "vlsp/feature_not_independent/feature_basic_punt_normal_I.json")
 
 #load data
 helper = Helper()

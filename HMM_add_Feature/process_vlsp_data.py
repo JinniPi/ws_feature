@@ -70,13 +70,14 @@ class ProcessDataVlsp:
             tag_array.extend(self.get_tag_doc(doc))
         return tag_array
 
-    def convert_doc_to_number(self, doc, vocab_number, syllables_vn, punctuation):
+    def convert_doc_to_number(self, doc, vocab_number, syllables_vn, punctuation, punt=False):
         """
         function return list sentence, each sentence is list dict, each dict is a syllable
         :param doc:
         :param vocab_number:
         :param syllables_vn:
         :param punctuation:
+        :param punt: if =False sẽ không đưa dấu câu về cùng 1 âm tiết
         :return:
         """
         helper = Helper()
@@ -91,8 +92,9 @@ class ProcessDataVlsp:
                 type_syllable = helper.check_type_syllable(syllable, syllables_vn, punctuation)
                 if type_syllable == "VIETNAMESE_SYLLABLE" and syllable in syllables_appear:
                     syllable_number[syllable] = vocab_number.get(syllable)
-                elif type_syllable == "PUNCT":
-                    syllable_number[syllable] = vocab_number.get(syllable)
+                elif punt == False:
+                    if type_syllable == "PUNCT":
+                        syllable_number[syllable] = vocab_number.get(syllable)
                 elif type_syllable == "VIETNAMESE_SYLLABLE" and syllable not in syllables_appear:
                     syllable_number[syllable] = vocab_number.get("FOREIGN_SYLLABLE")
                 else:

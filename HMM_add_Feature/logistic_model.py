@@ -63,6 +63,21 @@ class LogisticModel:
         grad = np.dot(e_count, denta_weight_matrix) - 2*k*weight
         return grad
 
+    def grad_weight_sum(self, W, feature, e_count, k):
+        """
+
+        :param weight:
+        :param feature:
+        :param e_count:
+        :param k:
+        :return:
+        """
+        grad = np.zeros(W.shape)
+        for index, feature_state in enumerate(feature):
+            grad += self.grad_weight(W, feature_state, e_count[index], k)
+        grad += 2*k*W
+        return grad
+
     def loss_function(self, weight, feature, e_count, k):
         """
 
@@ -76,6 +91,22 @@ class LogisticModel:
         e_count = np.array(e_count, dtype=np.float64)
         e_count = e_count/np.max(e_count, axis=0, keepdims=True)
         loss = np.dot(e_count, np.log(probabilities)) - k*norm(weight)
+        return loss
+
+    def loss_function_sum(self, W, feature, e_count, k):
+        """
+
+        :param W:
+        :param feature:
+        :param e_count:
+        :param k:
+        :return:
+        """
+        loss = 0
+        for index, feature_state in enumerate(feature):
+            loss_state = self.loss_function(W, feature_state, e_count[index], k)
+            loss += loss_state
+        loss += k*norm(W)
         return loss
 
     def has_converged(self, theta_new, grad_weight_new, stop_point):
@@ -108,6 +139,31 @@ class LogisticModel:
             v_new = gamma * v_old + eta * self.grad_weight(theta[-1], feature, e_count, k)
             weight_new = theta[-1] - v_new
             grad_weight_new = self.grad_weight(weight_new, feature, e_count, k)
+            if self.has_converged(weight_new, grad_weight_new, stop_point):
+                break
+            theta.append(weight_new)
+            v_old = v_new
+        return theta[-1]
+
+    def gradient_descent_momentum_sum(self, weight_init, feature, e_count, k, eta, gamma=0.9, max_iterations=20, stop_point=1e-3):
+        """
+
+        :param weight_init:
+        :param feature:
+        :param e_count:
+        :param k:
+        :param eta:
+        :param gamma:
+        :param max_iterations:
+        :param stop_point:
+        :return:
+        """
+        theta = [weight_init]
+        v_old = np.zeros_like(weight_init)
+        for it in range(1, max_iterations):
+            v_new = gamma * v_old + eta * self.grad_weight_sum(theta[-1], feature, e_count, k)
+            weight_new = theta[-1] - v_new
+            grad_weight_new = self.grad_weight_sum(weight_new, feature, e_count, k)
             if self.has_converged(weight_new, grad_weight_new, stop_point):
                 break
             theta.append(weight_new)
@@ -148,14 +204,14 @@ class LogisticModel:
 
 if __name__ == "__main__":
 
-    weight = np.array([0.9, 0.1])
-    e = [84558176.20886347, 34353113.57229507]
+    weight = np.array([0.9, 0.1, 0.5, 0.3])
+    e = [[84558176.20886347, 34353113.57229507], [84558176.20886347, 34353113.57229507]]
     print(weight)
-    feature = [[1,0], [0,1]]
+    feature = [[[1, 0, 0, 0], [0, 1, 0, 0]], [[0, 0, 1, 0], [0, 0, 0, 1]]]
     logistic = LogisticModel()
-    print("1", logistic.get_probabilities(weight, feature))
-    print("2", logistic.sum_probabilities_feature(weight, feature))
-    print("3", logistic.difference_weight_feature(weight, feature))
-    print("4", logistic.grad_weight(weight, feature, e, 0.1))
-    print("5", logistic.loss_function(weight, feature, e, 0.1))
-    print("6", logistic.gradient_descent(weight, feature, e, 0.1, 0.0000000001))
+    print("1", logistic.get_probabilities(weight, feature[0]))
+    # print("2", logistic.sum_probabilities_feature(weight, feature))
+    # print("3", logistic.difference_weight_feature(weight, feature))
+    print("4", logistic.grad_weight_sum(weight, feature, e, 0.1))
+    # print("5", logistic.loss_function(weight, feature, e, 0.1))
+    # print("6", logistic.gradient_descent(weight, feature, e, 0.1, 0.0000000001))

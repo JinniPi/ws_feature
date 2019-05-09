@@ -24,13 +24,14 @@ class Document:
 						array_pharagraph_with_sentence.append(sentences)
 		return array_pharagraph_with_sentence
 
-	def convert_doc_to_number(self, doc, vocab_number, syllables_vn, punctuation):
+	def convert_doc_to_number(self, doc, vocab_number, syllables_vn, punctuation, punt=False):
 		"""
 		function return list sentence, each sentence is list dict, each dict is a syllable
 		:param doc:
 		:param vocab_number:
 		:param syllables_vn:
 		:param punctuation:
+		:param punt defaul = False sẽ không coi dấu câu là 1 âm tiết
 		:return:
 		"""
 		helper = Helper()
@@ -46,8 +47,9 @@ class Document:
 				type_syllable = helper.check_type_syllable(syllable, syllables_vn, punctuation)
 				if type_syllable == "VIETNAMESE_SYLLABLE" and syllable in syllables_appear:
 					syllable_number[syllable] = vocab_number.get(syllable)
-				elif type_syllable == "PUNCT":
-					syllable_number[syllable] = vocab_number.get(syllable)
+				elif punt == False:
+					if type_syllable == "PUNCT":
+						syllable_number[syllable] = vocab_number.get(syllable)
 				elif type_syllable == "VIETNAMESE_SYLLABLE" and syllable not in syllables_appear:
 					syllable_number[syllable] = vocab_number.get("FOREIGN_SYLLABLE")
 				else:
@@ -82,7 +84,7 @@ if __name__ == "__main__":
 
 	helper = Helper()
 	DOC = Document()
-	# vocab_number = helper.loadfile_data_json("vocab_vlsp.json")
+	# vocab_number = helper.loadfile_data_json("vocab_vlsp_punt_normal.json")
 	syllables_vn = helper.load_dictionary("syllables_dictionary_1.txt")
 	punt = helper.load_punctuation()
 	print(helper.check_type_syllable("BS", syllables_vn, punt))

@@ -1,6 +1,6 @@
 
 from HMM_add_Feature.Helper import Helper
-from  HMM_add_Feature.Hmm import HiddenMarkovModel
+from  HMM_add_Feature.hmm_new import HiddenMarkovModel
 from utils.settings import DATA_MODEL_DIR
 from os.path import join
 from HMM_add_Feature.evaluate import Evalute
@@ -13,10 +13,10 @@ helper = Helper()
 if __name__ == "__main__":
 
     path_data_test = join(DATA_MODEL_DIR, "vlsp/test/train")
-    file_feature_e_b = join(DATA_MODEL_DIR, "vlsp/feature_not_independent/feature_basic_punt_normal_B.json")
-    file_feature_e_i = join(DATA_MODEL_DIR, "vlsp/feature_not_independent/feature_basic_punt_normal_I.json")
+    file_feature_e_b = join(DATA_MODEL_DIR, "vlsp/feature_not_independent/feature_enhance_not_idp_punt_special_B.json")
+    file_feature_e_i = join(DATA_MODEL_DIR, "vlsp/feature_not_independent/feature_basic_not_idp_punt_special_I.json")
 
-    invert_dictionary_path = join(DATA_MODEL_DIR, "vlsp/vocab_invert_vlsp_punt_normal.json")
+    invert_dictionary_path = join(DATA_MODEL_DIR, "vlsp/vocab_invert_vlsp_punt_special.json")
     occurrences_data_path = join(DATA_MODEL_DIR, "vlsp/data_pmi/occurrences_vlsp.pkl")
 
 
@@ -35,15 +35,16 @@ if __name__ == "__main__":
     punt = helper.load_punctuation()
     diction = Dictionary()
     vocab_feature_e = diction.load_file_feature_e(file_feature_e_b, file_feature_e_i)
-    vocab_e = diction.covert_feature_to_array(vocab_feature_e)
+    # vocab_e = diction.covert_feature_to_array(vocab_feature_e)
     vocab_t = diction.gen_feature_basic_t()
 
     # loadmodel
-    model = helper.load_model("model_basic_4.pickle")
+    model = helper.load_model("model_enhance_B_not_idp_punt_special.pickle")
     w_emission = model["emission"]
     w_transition = model["transition"]
     states = model["state"]
     vocab = model["vocab"]
+    vocab_e = diction.covert_feature_to_array(vocab_feature_e, 2*len(vocab)+6)
     # print(vocab)
     # if "Trúng" in vocab:
     #     print("yes")
@@ -74,7 +75,7 @@ if __name__ == "__main__":
     # print(trust)
     # results = ce.conlleval(predict, trust, list_word, "result.txt")
 
-    f = open("input_basic_pmi.txt", "w")
+    f = open("input_enhance_B_not_idp_punt_special_pmi.txt", "w")
     for index, sentence in enumerate(predict):
         for index_tag , tag in enumerate(sentence):
             word = list_word[index][index_tag]

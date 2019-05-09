@@ -118,7 +118,11 @@ băng
 bắng
 bằng
 bẵng
-bặng
+bặngusing_sub_params=True,
+        bigram_hash=bigram_hash,
+        invert_bigram_hash=invert_bigram_hash,
+        number_occurrences=statistic_bigram,
+        invert_dictionary=invert_hmm_dictionary
 bắp
 bắt
 bặt

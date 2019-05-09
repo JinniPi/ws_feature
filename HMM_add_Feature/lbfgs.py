@@ -20,3 +20,14 @@ class LBFGS:
             self.quadratic, initial_position=w, num_correction_pairs=10,
             tolerance=1e-3, max_iterations=10)
         return optimize_results
+
+    def quadratic_sum(self, w):
+        value = lg.loss_function_sum(w, self.feature, self.expect_count, self.k)
+        grad = lg.grad_weight_sum(w, self.feature, self.expect_count, self.k)
+        return value, grad
+
+    def lbgfs_sum(self, w):
+        optimize_results = tfp.optimizer.lbfgs_minimize(
+            self.quadratic_sum, initial_position=w, num_correction_pairs=10,
+            tolerance=1e-3, max_iterations=10)
+        return optimize_results

@@ -230,6 +230,6 @@ class Helper:
 
 
 if __name__ == "__main__":
-  path_vocab = "/home/trang/Downloads/job_rabiloo/Word_Tokenizer/data/vlsp/vocab_vlsp.json"
+  path_vocab = "/home/trang/Downloads/job_rabiloo/Word_Tokenizer/data/vlsp/vocab_vlsp_punt_special.json"
   helper = Helper()
-  helper.invert_diction(path_vocab, "vocab_invert_vlsp.json")
+  helper.invert_diction(path_vocab, "vocab_invert_vlsp_punt_special.json")
