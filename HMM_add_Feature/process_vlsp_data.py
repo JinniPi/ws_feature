@@ -92,9 +92,11 @@ class ProcessDataVlsp:
                 type_syllable = helper.check_type_syllable(syllable, syllables_vn, punctuation)
                 if type_syllable == "VIETNAMESE_SYLLABLE" and syllable in syllables_appear:
                     syllable_number[syllable] = vocab_number.get(syllable)
-                elif punt == False:
-                    if type_syllable == "PUNCT":
-                        syllable_number[syllable] = vocab_number.get(syllable)
+                elif type_syllable == "PUNCT":
+                        if punt == False:
+                            syllable_number[syllable] = vocab_number.get(syllable)
+                        else:
+                            syllable_number[syllable] = vocab_number.get(type_syllable)
                 elif type_syllable == "VIETNAMESE_SYLLABLE" and syllable not in syllables_appear:
                     syllable_number[syllable] = vocab_number.get("FOREIGN_SYLLABLE")
                 else:

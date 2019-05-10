@@ -9,14 +9,14 @@ class Evalute:
     def __init__(self, model: HiddenMarkovModel):
         self.model = model
 
-    def convert_data(self, list_doc, syllables_vn, punt):
+    def convert_data(self, list_doc, syllables_vn, punt, pun_option=False):
         tmp = []
         list_sentence = []
         list_syllable = []
         list_index = []
         vocab = self.model.vocab_number
         for doc in list_doc:
-            tmp.extend(pdv.convert_doc_to_number(doc, vocab, syllables_vn, punt, True))
+            tmp.extend(pdv.convert_doc_to_number(doc, vocab, syllables_vn, punt, pun_option))
 
         for i in tmp:
             if i != []:

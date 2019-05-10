@@ -10,18 +10,19 @@ if __name__ == "__main__":
 	path_vlsp = join(DATA_MODEL_DIR, "vlsp/train")
 	path_syllable_vn = join(DATA_MODEL_DIR, "syllable_vn/syllables_dictionary_1.txt")
 	dic = Dictionary()
-	# dic.build_vocab(path_vlsp, "vocab_vlsp_lower.json", path_syllable_vn, "vlsp")
-	path_vocab = join(DATA_MODEL_DIR, "vlsp/vocab_vlsp_punt_special.json")
+	# dic.build_vocab(path_vlsp, "vocab_vlsp_punt_special.json", path_syllable_vn, "vlsp", True)
+	path_vocab = join(DATA_MODEL_DIR, "vlsp/vocab_vlsp_punt_normal.json")
 	vocab = Helper().loadfile_data_json(path_vocab)
 	print(len(vocab))
 	vocab_feature_basic = dic.gen_feature_basic_e(vocab)
-	Helper.write_json(vocab_feature_basic[0], "feature_basic_not_idp_punt_special_B.json")
-	Helper.write_json(vocab_feature_basic[1], "feature_basic_not_idp_punt_special_I.json")
+	Helper.write_json(vocab_feature_basic[0], "feature_basic_not_idp_punt_normal_B.json")
+	Helper.write_json(vocab_feature_basic[1], "feature_basic_not_idp_punt_normal_I.json")
 
 	vocab_feature_enhance = dic.add_enhance_to_feature_e(vocab_feature_basic, path_stop_word)
-	Helper.write_json(vocab_feature_enhance[0], "feature_enhance_not_idp_punt_special_B_(1).json")
-	Helper.write_json(vocab_feature_enhance[1], "feature_enhance_not_idp_punt_special_I_(1).json")
-	# print(dic.gen_feature_basic_t())
+	Helper.write_json(vocab_feature_enhance[0], "feature_enhance_not_idp_punt_normal_B.json")
+	Helper.write_json(vocab_feature_enhance[1], "feature_enhance_not_idp_punt_normal_I.json")
+	# # print(dic.gen_feature_basic_t())
+
 
 
 

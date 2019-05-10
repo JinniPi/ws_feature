@@ -251,6 +251,8 @@ class HiddenMarkovModel:
             else:
                 index_sub = index_observation_sequence % number_thread
                 sub_list_observations_sequence[index_sub].append(observations_sequence)
+        lb_e = LBFGS(self.vocab_feature_e, 0.1)
+        lb_t = LBFGS(self.feature_t, 0.1)
         while not check_convergence:
             print('===================*Iteration %i*===================' % iteration_number)
             list_counting = []
@@ -280,8 +282,9 @@ class HiddenMarkovModel:
             # calculate new weight emission matrix
             print("count e", counting_emissions)
             print("count t", counting_transition)
-            lb_e = LBFGS(counting_emissions, self.vocab_feature_e, 0.1)
-            lb_t = LBFGS(counting_transition, self.feature_t, 0.1)
+            lb_e.set_e(counting_emissions)
+            lb_t.set_e(counting_transition)
+
             self.W_emissions = lb_e.lbgfs_sum(self.W_emissions)
             self.w_transitions = lb_t.lbgfs_sum(self.w_transitions)
 
@@ -292,7 +295,7 @@ class HiddenMarkovModel:
             #     0.2,
             #     0.01
             # )
-
+            #
             # self.w_transitions = lg.gradient_descent_momentum_sum(
             #     self.w_transitions,
             #     self.feature_t,

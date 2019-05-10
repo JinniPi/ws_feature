@@ -33,8 +33,9 @@ class Dictionary:
         for doc in list_doc:
             list_syllable = helper.convert_doc_to_list(doc, option)
             for syllable in list_syllable:
+                # print(helper.check_type_syllable("biểu", syllables_vn, pun))
                 if helper.check_type_syllable(syllable, syllables_vn, pun) == "VIETNAMESE_SYLLABLE":
-                    vocab.add(syllable.lower())
+                    vocab.add(syllable)
                 elif punt == False and helper.check_type_syllable(syllable, syllables_vn, pun) == "PUNCT":
                     # elif helper.check_type_syllable(syllable, syllables_vn, pun) == "PUNCT":
                     vocab.add(syllable)
@@ -118,19 +119,19 @@ class Dictionary:
         """
         # index_0 = 2*len_vocab
         index = []
-        # if syllable == "PUNCT" or syllable in PUNT:
-        #     i = index_0 + 5
-        #     index.append(i)
-        # elif syllable == "FOREIGN_SYLLABLE":
-        #     i = index_0 + 4
-        #     index.append(i)
-        # elif syllable == "CODE":
-        #     i = index_0 + 3
-        #     index.append(i)
-        # elif syllable == "NUMBER":
-        #     i = index_0 + 2
-        #     index.append(i)
-        if syllable in list_stop_word:
+        if syllable == "PUNCT" or syllable in PUNT:
+            i = index_0 + 5
+            index.append(i)
+        elif syllable == "FOREIGN_SYLLABLE":
+            i = index_0 + 4
+            index.append(i)
+        elif syllable == "CODE":
+            i = index_0 + 3
+            index.append(i)
+        elif syllable == "NUMBER":
+            i = index_0 + 2
+            index.append(i)
+        elif syllable in list_stop_word:
             i = index_0 + 1
             index.append(i)
         elif syllable.istitle():

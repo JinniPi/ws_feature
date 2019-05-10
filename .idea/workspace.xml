@@ -4,40 +4,21 @@
     <list default="true" id="673ca3b1-af38-4a70-89d3-42d6c9ed126b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HMM_add_Feature/Dictionary.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/Dictionary.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/Helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/Helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/Main_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/Main_new.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HMM_add_Feature/buildvocab.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/buildvocab.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/document.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HMM_add_Feature/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/evaluate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/input_basic_pmi.txt" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/input_basic_pmi.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/feature_basic_not_idp_punt_special_B.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/feature_basic_not_idp_punt_special_I.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/hmm_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/hmm_new.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HMM_add_Feature/lbfgs.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/lbfgs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/logistic_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/logistic_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/model_basic.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/model/model_basic.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/model_basic_1.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/model/model_basic_1.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/model_basic_2.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/model/model_basic_2.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/model_basic_4.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/model/model_basic_4.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/model_enhance.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/model/model_enhance.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/model_enhance_2.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/model/model_enhance_2.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/model_enhance_lower.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/model/model_enhance_lower.pickle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HMM_add_Feature/process_vlsp_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/process_vlsp_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/syllables_dictionary_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/syllables_dictionary_1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HMM_add_Feature/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/test_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/test_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_basic_B.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_independent/feature_basic_punt_normal_B.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_basic_B_1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_independent/feature_basic_punt_special_B.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_basic_B_lower.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_basic_B_lower.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_basic_I.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_independent/feature_basic_punt_normal_I.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_basic_I_1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_independent/feature_basic_punt_special_I.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_basic_I_lower.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_basic_I_lower.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_enhance_B.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_independent/feature_enhance_punt_normal_B.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_enhance_B_1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_independent/feature_enhance_punt_special_B.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_enhance_B_lower.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_B_lower.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_enhance_I.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_independent/feature_enhance_punt_normal_I.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_enhance_I_1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_independent/feature_enhance_punt_special_I.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/feature/feature_enhance_I_lower.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_I_lower.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/vocab_invert_vlsp.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/vocab_invert_vlsp_punt_normal.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/vocab_vlsp.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/vocab_vlsp_punt_normal.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/vlsp/vocab_vlsp_1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/vocab_vlsp_punt_special.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HMM_add_Feature/test_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/HMM_add_Feature/test_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_basic_not_idp_punt_normal_B.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_basic_not_idp_punt_normal_B.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_basic_not_idp_punt_normal_I.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_basic_not_idp_punt_normal_I.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_normal_B.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_normal_B.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_normal_I.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_normal_I.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/vlsp/vocab_vlsp_punt_normal.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/vlsp/vocab_vlsp_punt_normal.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HMM_add_Feature/buildvocab.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="22" column="91" selection-start-line="22" selection-start-column="91" selection-end-line="22" selection-end-column="91" />
+            <state relative-caret-position="337">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -60,20 +41,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_special_B.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_special_B_(1).json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HMM_add_Feature/Main_new.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
+            <state relative-caret-position="144">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
               </folding>
@@ -84,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HMM_add_Feature/lbfgs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+            <state relative-caret-position="-116">
+              <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -94,22 +65,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HMM_add_Feature/Main.py">
+        <entry file="file://$PROJECT_DIR$/HMM_add_Feature/test_1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HMM_add_Feature/test_new.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1098">
-              <caret line="67" column="30" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
+            <state relative-caret-position="-71">
+              <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
               <folding>
                 <element signature="e#1#42#0" expanded="true" />
               </folding>
@@ -118,34 +77,66 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/HMM_add_Feature/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="90" column="27" lean-forward="true" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
+              <folding>
+                <element signature="e#2437#2473#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HMM_add_Feature/test_new.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5">
+              <caret line="54" column="75" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
+              <folding>
+                <element signature="e#1#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HMM_add_Feature/input_enhance_not_idp_punt_special.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HMM_add_Feature/logistic_model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2736">
+              <caret line="214" column="40" selection-start-line="214" selection-start-column="40" selection-end-line="214" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HMM_add_Feature/evaluate.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="18" column="91" selection-start-line="18" selection-start-column="91" selection-end-line="18" selection-end-column="91" />
+              <folding>
+                <element signature="e#0#49#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HMM_add_Feature/hmm_new.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="305" column="54" lean-forward="true" selection-start-line="305" selection-start-column="54" selection-end-line="305" selection-end-column="54" />
+            <state relative-caret-position="234">
+              <caret line="287" column="63" selection-start-line="287" selection-start-column="63" selection-end-line="287" selection-end-column="63" />
               <folding>
                 <element signature="e#47#65#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HMM_add_Feature/document.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1044">
-              <caret line="62" column="52" selection-start-line="62" selection-start-column="52" selection-end-line="62" selection-end-column="52" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HMM_add_Feature/syllables_dictionary_1.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101916">
-              <caret line="5662" column="4" selection-start-line="5662" selection-start-column="4" selection-end-line="5662" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -180,22 +171,22 @@
         <option value="$PROJECT_DIR$/HMM_add_Feature/contribute_probabilites.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/input.txt" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/emission.txt" />
-        <option value="$PROJECT_DIR$/HMM_add_Feature/test.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/Main.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/test_1.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/Hmm.py" />
-        <option value="$PROJECT_DIR$/HMM_add_Feature/process_vlsp_data.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/document.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/logistic_model.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/Helper.py" />
-        <option value="$PROJECT_DIR$/HMM_add_Feature/evaluate.py" />
-        <option value="$PROJECT_DIR$/HMM_add_Feature/Dictionary.py" />
-        <option value="$PROJECT_DIR$/HMM_add_Feature/buildvocab.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/syllables_dictionary_1.txt" />
+        <option value="$PROJECT_DIR$/HMM_add_Feature/Dictionary.py" />
+        <option value="$PROJECT_DIR$/HMM_add_Feature/process_vlsp_data.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/Main_new.py" />
+        <option value="$PROJECT_DIR$/HMM_add_Feature/buildvocab.py" />
+        <option value="$PROJECT_DIR$/HMM_add_Feature/evaluate.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/test_new.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/lbfgs.py" />
         <option value="$PROJECT_DIR$/HMM_add_Feature/hmm_new.py" />
+        <option value="$PROJECT_DIR$/HMM_add_Feature/test.py" />
       </list>
     </option>
   </component>
@@ -211,7 +202,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -223,6 +213,12 @@
               <item name="Word_Tokenizer" type="b2602c69:ProjectViewProjectNode" />
               <item name="Word_Tokenizer" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Word_Tokenizer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Word_Tokenizer" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="syllable_vn" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Word_Tokenizer" type="b2602c69:ProjectViewProjectNode" />
@@ -244,6 +240,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -252,19 +249,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.toDoOptions" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/vlsp/feature_not_independent" />
+      <recent name="$PROJECT_DIR$/data/vlsp" />
+      <recent name="$PROJECT_DIR$/data/vlsp/feature_independent" />
+      <recent name="$PROJECT_DIR$/HMM_add_Feature/model" />
+      <recent name="$PROJECT_DIR$/data/vlsp/feature_private" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data/vlsp" />
       <recent name="$PROJECT_DIR$/data/vlsp/data_pmi" />
       <recent name="$PROJECT_DIR$/HMM_add_Feature/data" />
       <recent name="$PROJECT_DIR$/HMM_add_Feature" />
       <recent name="$PROJECT_DIR$/data/vlsp/test" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/data/vlsp/feature_not_independent" />
-      <recent name="$PROJECT_DIR$/data/vlsp/feature_independent" />
-      <recent name="$PROJECT_DIR$/HMM_add_Feature/model" />
-      <recent name="$PROJECT_DIR$/data/vlsp/feature_private" />
-      <recent name="$PROJECT_DIR$/data/vlsp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -279,7 +276,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test_new">
+  <component name="RunManager" selected="Python.test">
     <configuration name="Helper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Word_Tokenizer" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -343,7 +340,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="logistic_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Word_Tokenizer" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -355,7 +352,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HMM_add_Feature/logistic_model.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HMM_add_Feature/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -387,11 +384,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.test_new" />
         <item itemvalue="Python.Main_new" />
         <item itemvalue="Python.buildvocab" />
         <item itemvalue="Python.Helper" />
-        <item itemvalue="Python.logistic_model" />
       </list>
     </recent_temporary>
   </component>
@@ -422,18 +419,18 @@
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15673982" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2554859" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4929467" weight="0.14169382" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.52978057" weight="0.31921825" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.52978057" visible="true" weight="0.048859935" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4992163" weight="0.38599348" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32899022" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.13029316" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.61677116" weight="0.4576547" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.61677116" weight="0.048859935" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.47021943" side_tool="true" weight="0.95114005" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -486,12 +483,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/vlsp/feature_independent/feature_basic_punt_special_B.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/result.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/HMM_add_Feature/input.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="29034">
@@ -557,48 +548,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="44" column="24" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/vlsp/vocab_vlsp_punt_special.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1" selection-start-column="1" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/vlsp/feature_independent/feature_enhance_punt_normal_B.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/HMM_add_Feature/input_basic_pmi.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/vlsp/vocab_vlsp_punt_normal.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="773" selection-start-column="773" selection-end-column="773" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/vlsp/feature_independent/feature_basic_punt_normal_B.json">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/logistic_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="214" column="40" selection-start-line="214" selection-start-column="40" selection-end-line="214" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/HMM_add_Feature/Hmm.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -606,43 +563,6 @@
           <caret line="10" column="20" selection-end-line="498" />
           <folding>
             <element signature="e#47#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/Helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4086">
-          <caret line="234" column="67" selection-start-line="234" selection-start-column="37" selection-end-line="234" selection-end-column="67" />
-          <folding>
-            <element signature="e#1#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/process_vlsp_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1242">
-          <caret line="69" column="45" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/evaluate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/test_1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="28" column="3" selection-end-line="90" />
-          <folding>
-            <element signature="e#1#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -655,14 +575,6 @@
         <state relative-caret-position="-20932" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_normal_B.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-23322" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_basic_not_idp_punt_special_B.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_basic_not_idp_punt_special_I.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -671,29 +583,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/vlsp/vocab_invert_vlsp_punt_special.json">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_normal_I.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/Dictionary.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2322">
-          <caret line="132" column="8" selection-start-line="132" selection-start-column="8" selection-end-line="132" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/buildvocab.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="22" column="91" selection-start-line="22" selection-start-column="91" selection-end-line="22" selection-end-column="91" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_special_B.json">
       <provider selected="true" editor-type-id="text-editor" />
@@ -707,16 +596,6 @@
           <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/test_new.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1098">
-          <caret line="67" column="30" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
-          <folding>
-            <element signature="e#1#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -738,32 +617,165 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/lbfgs.py">
+    <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_normal_I.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        <state relative-caret-position="-31305" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_enhance_not_idp_punt_normal_B.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7407" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_basic_not_idp_punt_special_B.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/vlsp/vocab_vlsp_punt_normal.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="773" selection-start-column="773" selection-end-column="773" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/Helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="146" column="8" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#1#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/Main_new.py">
+    <entry file="file://$PROJECT_DIR$/data/syllable_vn/syllables_dictionary_1.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
+        <state relative-caret-position="521">
+          <caret line="158" column="2" lean-forward="true" selection-start-line="158" selection-start-column="2" selection-end-line="158" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/Dictionary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="35" column="16" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="78" />
           <folding>
-            <element signature="e#0#53#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/vocab_vlsp_punt_special.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/vlsp/vocab_vlsp_punt_special.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/process_vlsp_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="98" column="86" selection-start-line="98" selection-start-column="86" selection-end-line="98" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/vlsp/feature_not_independent/feature_basic_not_idp_punt_normal_B.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/vlsp/vocab_vlsp_punt_normal.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/buildvocab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/evaluate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="18" column="91" selection-start-line="18" selection-start-column="91" selection-end-line="18" selection-end-column="91" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/test_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5">
+          <caret line="54" column="75" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
+          <folding>
+            <element signature="e#1#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/input_enhance_not_idp_punt_special.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/logistic_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2736">
+          <caret line="214" column="40" selection-start-line="214" selection-start-column="40" selection-end-line="214" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/HMM_add_Feature/hmm_new.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="305" column="54" lean-forward="true" selection-start-line="305" selection-start-column="54" selection-end-line="305" selection-end-column="54" />
+        <state relative-caret-position="234">
+          <caret line="287" column="63" selection-start-line="287" selection-start-column="63" selection-end-line="287" selection-end-column="63" />
           <folding>
             <element signature="e#47#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/test_1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-71">
+          <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+          <folding>
+            <element signature="e#1#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/Main_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/lbfgs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-116">
+          <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HMM_add_Feature/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="90" column="27" lean-forward="true" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
+          <folding>
+            <element signature="e#2437#2473#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -13,8 +13,8 @@ helper = Helper()
 if __name__ == "__main__":
 
     path_data_test = join(DATA_MODEL_DIR, "vlsp/test/train")
-    file_feature_e_b = join(DATA_MODEL_DIR, "vlsp/feature_not_independent/feature_enhance_not_idp_punt_special_B.json")
-    file_feature_e_i = join(DATA_MODEL_DIR, "vlsp/feature_not_independent/feature_basic_not_idp_punt_special_I.json")
+    file_feature_e_b = join(DATA_MODEL_DIR, "vlsp/feature_not_independent/feature_enhance_not_idp_punt_normal_B.json")
+    file_feature_e_i = join(DATA_MODEL_DIR, "vlsp/feature_not_independent/feature_basic_not_idp_punt_normal_I.json")
 
     invert_dictionary_path = join(DATA_MODEL_DIR, "vlsp/vocab_invert_vlsp_punt_special.json")
     occurrences_data_path = join(DATA_MODEL_DIR, "vlsp/data_pmi/occurrences_vlsp.pkl")
@@ -39,25 +39,20 @@ if __name__ == "__main__":
     vocab_t = diction.gen_feature_basic_t()
 
     # loadmodel
-    model = helper.load_model("model_enhance_B_not_idp_punt_special.pickle")
+    model = helper.load_model("model_enhance_B_not_idp_punt_normal.pickle")
     w_emission = model["emission"]
     w_transition = model["transition"]
     states = model["state"]
     vocab = model["vocab"]
     vocab_e = diction.covert_feature_to_array(vocab_feature_e, 2*len(vocab)+6)
-    # print(vocab)
-    # if "Trúng" in vocab:
-    #     print("yes")
     start = model["start_probabilities"]
-    # print(invert_hmm_dictionary)
-    # print(invert_hmm_dictionary[2124])
 
     hmm = HiddenMarkovModel(states, w_transition, w_emission, start, vocab_e, vocab_t, vocab)
     print(hmm.get_matrix_emission())
     print(hmm.get_matrix_transition())
 
     ev = Evalute(hmm)
-    list_sentence_unlabel = ev.convert_data(data, syllables_vn, punt)
+    list_sentence_unlabel = ev.convert_data(data, syllables_vn, punt, False)
 
     hmm = HiddenMarkovModel(states, w_transition, w_emission, start, vocab_e, vocab_t, vocab)
     ev = Evalute(hmm)
@@ -65,17 +60,17 @@ if __name__ == "__main__":
     list_word = pdv.get_all_sentence(data)
     predict = ev.predict_tag(
         list_sentence_unlabel,
-        using_sub_params=True,
-        bigram_hash=bigram_hash,
-        invert_bigram_hash=invert_bigram_hash,
-        number_occurrences=statistic_bigram,
-        invert_dictionary=invert_hmm_dictionary
+        # using_sub_params=True,
+        # bigram_hash=bigram_hash,
+        # invert_bigram_hash=invert_bigram_hash,
+        # number_occurrences=statistic_bigram,
+        # invert_dictionary=invert_hmm_dictionary
     )
     trust = pdv.get_tag_all(data)
     # print(trust)
     # results = ce.conlleval(predict, trust, list_word, "result.txt")
 
-    f = open("input_enhance_B_not_idp_punt_special_pmi.txt", "w")
+    f = open("input_enhance_B_not_idp_punt_normal.txt", "w")
     for index, sentence in enumerate(predict):
         for index_tag , tag in enumerate(sentence):
             word = list_word[index][index_tag]
